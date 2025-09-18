@@ -1,0 +1,43 @@
+[project]
+name = "django-places"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Alex Candido", email = "alex.candido.tec@gmail.com"},
+]
+
+dependencies = [
+    "django>=5.2.6",
+    "djangorestframework>=3.16.1",
+    "django-extensions>=4.1",
+    "markdown>=3.9",
+    "django-filter>=25.1",
+    "dataclasses>=0.6",
+    "python-dotenv>=1.1.1",
+    "dependency-injector>=4.48.1",
+    "psycopg2-binary>=2.9.10",
+    "dj-database-url>=3.0.1",
+    "pydantic>=2.11.9",
+    "pydantic-core>=2.33.2",
+    "pydantic-settings>=2.10.1",
+    "djangorestframework-gis>=1.2.0",
+    "whitenoise>=6.11.0",
+    "django-cors-headers>=4.9.0",
+    "gunicorn>=23.0.0"
+]
+
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.scripts]
+manage="python ./src/manage.py"
+server = "pdm run manage runserver 0.0.0.0:3333"
+gunicorn = "gunicorn django_app.wsgi:application --bind 0.0.0.0:3333 --chdir src/ --workers 5 --timeout 60"
