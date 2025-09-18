@@ -1,14 +1,18 @@
 {
+  "buildCommand": "bash build_files.sh",
   "outputDirectory": "static/",
-  "buildCommand": "build_files.sh",
   "builds": [
     {
       "src": "src/django_app/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.10" }
     }
   ],
   "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "src/django_app/wsgi.py",
