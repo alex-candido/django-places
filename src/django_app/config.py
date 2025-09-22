@@ -7,7 +7,7 @@ from typing import List, Literal, Sequence
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-ENV_FILE = BASE_DIR / "envs/.env"
+ENV_FILE = BASE_DIR / ".env"
 
 class ConfigService(BaseSettings):
     model_config = SettingsConfigDict(env_file=str(ENV_FILE), case_sensitive=True, extra="ignore")

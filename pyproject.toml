@@ -39,5 +39,5 @@ distribution = true
 
 [tool.pdm.scripts]
 manage="python ./src/manage.py"
-server = "pdm run manage runserver 0.0.0.0:3333"
-gunicorn = "gunicorn django_app.wsgi:application --bind 0.0.0.0:3333 --chdir src/ --workers 5 --timeout 60"
+server = "pdm run manage runserver 0.0.0.0:8000"
+gunicorn = "gunicorn django_app.wsgi:application --bind 0.0.0.0:8000 --chdir src/ --workers 5 --timeout 60"

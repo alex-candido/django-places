@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yaml
+
+# Python
+.python-version
+.venv
+.pdm-build
+__pycache__
+*.pyc
+
+# Node
+node_modules
+
+# VSCode
+.vscode
+
+# Env
+.env
+envs/.env.example
+
+# Other
+.pdm-build/
+libs/
