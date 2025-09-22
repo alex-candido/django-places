@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 from django_app.config import ConfigService
 
-load_dotenv()
+load_dotenv('envs/.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_gis',
+    
+    'modules.places',
 ]
 
 MIDDLEWARE = [
@@ -74,10 +76,11 @@ ROOT_URLCONF = 'django_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -151,7 +154,3 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 CORS_ALLOW_ALL_ORIGINS = config.CORS_ALLOW_ALL_ORIGINS
 CORS_ALLOWED_ORIGINS = config.CORS_ALLOWED_ORIGINS
 
-# --- GISModelAdmin
-# --- GDAL/GEOS paths
-GDAL_LIBRARY_PATH = "libgdal.so"
-GEOS_LIBRARY_PATH = "libgeos_c.so.1"

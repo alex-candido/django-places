@@ -24,11 +24,15 @@ class ConfigService(BaseSettings):
     @property
     def DATABASE_CONFIG(self) -> dj_database_url.DBConfig:
         if self.DJANGO_ENVIRONMENT.lower() == "test":
-            return dj_database_url.parse(self.DATABASE_URL or "sqlite:///test_db.sqlite3")
+            db_config = dj_database_url.parse(self.DATABASE_URL or "sqlite:///test_db.sqlite3")
         elif self.DJANGO_ENVIRONMENT:
-            return dj_database_url.parse(self.DATABASE_URL)
+            db_config = dj_database_url.parse(self.DATABASE_URL)
         else:
             raise ValueError(
                 f"DJANGO_ENVIRONMENT must be defined for the '{self.DJANGO_ENVIRONMENT}' environment."
             )
+        if db_config.get('ENGINE') == 'django.db.backends.postgresql':
+            db_config['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+        
+        return db_config
                                       

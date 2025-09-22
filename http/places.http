@@ -1,0 +1,85 @@
+@api_root = http://localhost:3333/api/v1
+
+###
+# @name listPlaces
+# List all places
+GET {{api_root}}/places/
+
+###
+# @name listPlacesWithPagination
+# List places with pagination
+GET {{api_root}}/places/?page=2&page_size=5
+
+###
+# @name getPlaceById
+# Get a single place by ID
+GET {{api_root}}/places/1/
+
+###
+# @name createPlace
+# Create a new place
+POST {{api_root}}/places/
+Content-Type: application/json
+
+{
+    "name": "My New Place",
+    "description": "A great place to be.",
+    "address": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "country": "US",
+    "location": {
+        "type": "Point",
+        "coordinates": [-122.4194, 37.7749]
+    },
+    "status": 1,
+    "type": 2
+}
+
+###
+# @name updatePlace
+# Update a place
+PUT {{api_root}}/places/1/
+Content-Type: application/json
+
+{
+    "name": "My Updated Place Name"
+}
+
+###
+# @name patchPlace
+# Partially update a place
+PATCH {{api_root}}/places/1/
+Content-Type: application/json
+
+{
+    "description": "An even better description."
+}
+
+###
+# @name deletePlace
+# Delete a place
+DELETE {{api_root}}/places/1/
+
+###
+# @name filterPlacesByName
+# Filter places by name
+GET {{api_root}}/places/?name__icontains=bar
+
+###
+# @name filterPlacesByCity
+# Filter places by city
+GET {{api_root}}/places/?city=Lisboa
+
+###
+# @name filterPlacesInBbox
+# Filter places within a bounding box
+# Bbox format: min_lon,min_lat,max_lon,max_lat
+GET {{api_root}}/places/?in_bbox=-46.70,-23.60,-46.60,-23.50
+
+###
+# @name filterPlacesByDistance
+# Filter places by distance from a point
+# dist in meters, point in lon,lat
+GET {{api_root}}/places/?dist=5000&point=-46.65,-23.55
+
